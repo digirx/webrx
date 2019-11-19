@@ -1,2 +1,0 @@
-# webrx
-Learn openwebrx project
