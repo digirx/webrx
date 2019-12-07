@@ -568,6 +568,14 @@ input[type=range]:focus::-ms-fill-upper
 	color: #FFFF50;
 }
 
+.openwebrx-button:hover, .openwebrx-stepfreq-button.highlighted
+{
+	/*background:-webkit-gradient( linear, left top, left bottom, color-stop(0.0	, #3F3F3F), color-stop(1, #777777) );
+	background:-moz-linear-gradient( center top, #373737 5%, #4F4F4F 100% );*/
+	background: #474747;
+	color: #FFFF50;
+}
+
 .openwebrx-button:active
 {
 	background: #777777;
@@ -579,6 +587,14 @@ input[type=range]:focus::-ms-fill-upper
 	width: 38px;
 	height: 19px;
 	font-size: 12pt;
+	text-align: center;
+}
+
+.openwebrx-stepfreq-button
+{
+	width: 30px;
+	height: 15px;
+	font-size: 10pt;
 	text-align: center;
 }
 

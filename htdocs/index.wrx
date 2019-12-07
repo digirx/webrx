@@ -91,18 +91,18 @@
                     <div id="webrx-actual-freq">---.--- MHz</div>
 
                     <div class="openwebrx-panel-line">
-                        <div class="openwebrx-button openwebrx-demodulator-button" id="openwebrx-button-fdown5k" 
+                        <div class="openwebrx-button openwebrx-stepfreq-button" id="openwebrx-button-fdown5k" 
                             onclick="btn_change_freq('dn5k');">-5k</div>
-                        <div class="openwebrx-button openwebrx-demodulator-button" id="openwebrx-button-fdown1k" 
+                        <div class="openwebrx-button openwebrx-stepfreq-button" id="openwebrx-button-fdown1k" 
                             onclick="btn_change_freq('dn1k');">-1k</div>
-                        <div class="openwebrx-button openwebrx-demodulator-button" id="openwebrx-button-fdown10" 
+                        <div class="openwebrx-button openwebrx-stepfreq-button" id="openwebrx-button-fdown10" 
                             onclick="btn_change_freq('dn10');">-10</div>
 
-                        <div class="openwebrx-button openwebrx-demodulator-button" id="openwebrx-button-fup10" 
+                        <div class="openwebrx-button openwebrx-stepfreq-button" id="openwebrx-button-fup10" 
                             onclick="btn_change_freq('up10');">+10</div>
-                        <div class="openwebrx-button openwebrx-demodulator-button" id="openwebrx-button-fup1k" 
+                        <div class="openwebrx-button openwebrx-stepfreq-button" id="openwebrx-button-fup1k" 
                             onclick="btn_change_freq('up1k');">+1k</div>
-                        <div class="openwebrx-button openwebrx-demodulator-button" id="openwebrx-button-fup5k" 
+                        <div class="openwebrx-button openwebrx-stepfreq-button" id="openwebrx-button-fup5k" 
                             onclick="btn_change_freq('up5k');">+5k</div>
                     </div>
 

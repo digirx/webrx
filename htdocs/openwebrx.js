@@ -545,7 +545,7 @@ function demodulator_default_analog(offset_frequency,subtype)
 		mkenvelopes(this.visible_range);
 		this.parent.set();
 		//will have to change this when changing to multi-demodulator mode:
-		e("webrx-actual-freq").innerHTML=format_frequency("{x} MHz",center_freq+this.parent.offset_frequency,1e6,4);
+		e("webrx-actual-freq").innerHTML=format_frequency("{x} kHz",center_freq+this.parent.offset_frequency,1e6,6);
 		return true;
 	};
 
@@ -635,7 +635,7 @@ function btn_change_freq(subtype)
 			break;
 
 
-		case "down10":
+		case "dn10":
 				demodulator_set_offset_frequency(0, demodulators[0].offset_frequency + 10);
 			break;
 				
@@ -667,7 +667,7 @@ var scale_canvas;
 
 function scale_setup()
 {
-	e("webrx-actual-freq").innerHTML=format_frequency("{x} MHz",canvas_get_frequency(window.innerWidth/2),1e6,4);
+	e("webrx-actual-freq").innerHTML=format_frequency("{x} kHz",canvas_get_frequency(window.innerWidth/2),1e6,6);
 	scale_canvas=e("openwebrx-scale-canvas");
 	scale_ctx=scale_canvas.getContext("2d");
 	scale_canvas.addEventListener("mousedown", scale_canvas_mousedown, false);
@@ -1019,7 +1019,7 @@ function canvas_mousemove(evt)
 			mkscale();
 		}
 	}
-	else e("webrx-mouse-freq").innerHTML=format_frequency("{x} MHz",canvas_get_frequency(relativeX),1e6,4);
+	else e("webrx-mouse-freq").innerHTML=format_frequency("{x} kHz",canvas_get_frequency(relativeX),1e6,6);
 }
 
 function canvas_container_mouseout(evt)
@@ -1039,7 +1039,7 @@ function canvas_mouseup(evt)
 	{
 		//ws.send("SET offset_freq="+canvas_get_freq_offset(relativeX).toString());
 		demodulator_set_offset_frequency(0, canvas_get_freq_offset(relativeX));
-		e("webrx-actual-freq").innerHTML=format_frequency("{x} MHz",canvas_get_frequency(relativeX),1e6,4);
+		e("webrx-actual-freq").innerHTML=format_frequency("{x} kHz",canvas_get_frequency(relativeX),1e6,6);
 	}
 	else
 	{
