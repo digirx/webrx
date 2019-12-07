@@ -592,9 +592,9 @@ input[type=range]:focus::-ms-fill-upper
 
 .openwebrx-stepfreq-button
 {
-	width: 30px;
-	height: 15px;
-	font-size: 10pt;
+	width: 25px;
+	height: 10px;
+	font-size: 8pt;
 	text-align: center;
 }
 

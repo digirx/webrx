@@ -636,7 +636,7 @@ function btn_change_freq(subtype)
 
 
 		case "dn10":
-				demodulator_set_offset_frequency(0, demodulators[0].offset_frequency + 10);
+				demodulator_set_offset_frequency(0, demodulators[0].offset_frequency - 10);
 			break;
 				
 		case "dn5k":
