@@ -545,7 +545,8 @@ function demodulator_default_analog(offset_frequency,subtype)
 		mkenvelopes(this.visible_range);
 		this.parent.set();
 		//will have to change this when changing to multi-demodulator mode:
-		e("webrx-actual-freq").innerHTML=format_frequency("{x} kHz",center_freq+this.parent.offset_frequency,1e6,6);
+		//e("webrx-actual-freq").innerHTML=format_frequency("{x} kHz",center_freq+this.parent.offset_frequency,1e6,6);
+		print_actual_freq( center_freq+ this.parent.offset_frequency );
 		return true;
 	};
 
@@ -617,6 +618,28 @@ function demodulator_set_offset_frequency(which,to_what)
 	mkenvelopes(get_visible_freq_range());
 }
 
+function print_actual_freq(freq)
+{
+
+// e("freq_input").innerHTML=format_frequency("{x}",center_freq + demodulators[0].offset_frequency,1e6,6);
+
+
+//console.log("act freq",freq);
+
+e("freq_input").value=freq/1000;
+
+
+}
+
+
+
+function input_freq_changed(freq)
+{
+	console.log("new freq is" ,freq);
+	demodulator_set_offset_frequency(0, freq*1000-center_freq);
+	 print_actual_freq(freq*1000);
+}
+
 
 function btn_change_freq(subtype)
 { 
@@ -650,7 +673,8 @@ function btn_change_freq(subtype)
 	}
 	
 
-	e("webrx-actual-freq").innerHTML=format_frequency("{x} kHz",center_freq + demodulators[0].offset_frequency,1e6,6);	
+	print_actual_freq( center_freq+demodulators[0].offset_frequency);
+//	e("webrx-actual-freq").innerHTML=format_frequency("{x} kHz",center_freq + demodulators[0].offset_frequency,1e6,6);	
 
 }
 
@@ -667,7 +691,9 @@ var scale_canvas;
 
 function scale_setup()
 {
-	e("webrx-actual-freq").innerHTML=format_frequency("{x} kHz",canvas_get_frequency(window.innerWidth/2),1e6,6);
+//	e("webrx-actual-freq").innerHTML=format_frequency("{x} kHz",canvas_get_frequency(window.innerWidth/2),1e6,6);
+	print_actual_freq( canvas_get_frequency(window.innerWidth/2));
+
 	scale_canvas=e("openwebrx-scale-canvas");
 	scale_ctx=scale_canvas.getContext("2d");
 	scale_canvas.addEventListener("mousedown", scale_canvas_mousedown, false);
@@ -1039,7 +1065,8 @@ function canvas_mouseup(evt)
 	{
 		//ws.send("SET offset_freq="+canvas_get_freq_offset(relativeX).toString());
 		demodulator_set_offset_frequency(0, canvas_get_freq_offset(relativeX));
-		e("webrx-actual-freq").innerHTML=format_frequency("{x} kHz",canvas_get_frequency(relativeX),1e6,6);
+		//e("webrx-actual-freq").innerHTML=format_frequency("{x} kHz",canvas_get_frequency(relativeX),1e6,6);
+		print_actual_freq( center_freq+demodulators[0].offset_frequency);
 	}
 	else
 	{
@@ -1701,7 +1728,8 @@ function audio_init()
 	if(starting_offset_frequency)
 	{
 		demodulators[0].offset_frequency = starting_offset_frequency;
-		e("webrx-actual-freq").innerHTML=format_frequency("{x} MHz",center_freq+starting_offset_frequency,1e6,4);
+		//e("webrx-actual-freq").innerHTML=format_frequency("{x} MHz",center_freq+starting_offset_frequency,1e6,4);
+		print_actual_freq( center_freq+demodulators[0].offset_frequency);
 		demodulators[0].set();
 		mkscale();
 	}

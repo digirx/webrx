@@ -88,8 +88,20 @@
             </div>
             <div id="openwebrx-panels-container">
                 <div class="openwebrx-panel" id="openwebrx-panel-receiver" data-panel-name="client-params" data-panel-pos="right" data-panel-order="0" data-panel-size="259,115">
-                    <div id="webrx-actual-freq">---.--- MHz</div>
 
+<!--                    <div id="webrx-actual-freq">---.--- MHz </div>  -->
+
+		 <div id="webrx-actual-freq"> kHz </div>
+			
+		<input type="number" min="0" max="100000" step="0.001" id="freq_input"
+			onchange="input_freq_changed(value)"; / >
+
+
+
+			
+		 
+
+	
                     <div class="openwebrx-panel-line">
                         <div class="openwebrx-button openwebrx-stepfreq-button" id="openwebrx-button-fdown5k" 
                             onclick="btn_change_freq('dn5k');">-5k</div>
