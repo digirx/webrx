@@ -18,7 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-1
+v2
 */
 
 is_firefox=navigator.userAgent.indexOf("Firefox")!=-1;
