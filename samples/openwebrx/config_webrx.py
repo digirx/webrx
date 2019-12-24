@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """ 
-config_webrx: configuration options for OpenWebRX
+config_webrx: configuration options for  OpenWebRX
 
     This file is part of OpenWebRX,
     an open-source SDR receiver software with a web UI.
