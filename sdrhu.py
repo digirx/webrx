@@ -1,6 +1,6 @@
 #!/usr/bin/python2
 """
-
+ 
     This file is part of OpenWebRX, 
     an open-source SDR receiver software with a web UI.
     Copyright (c) 2013-2015 by Andras Retzler <randras@sdr.hu>
