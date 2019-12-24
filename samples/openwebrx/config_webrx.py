@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""
+""" 
 config_webrx: configuration options for OpenWebRX
 
     This file is part of OpenWebRX,
