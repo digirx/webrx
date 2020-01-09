@@ -116,10 +116,11 @@
                             onclick="btn_change_freq('up1k');">+1k</div>
                         <div class="openwebrx-button openwebrx-stepfreq-button" id="openwebrx-button-fup5k" 
                             onclick="btn_change_freq('up5k');">+5k</div>
+                        <div class="openwebrx-button openwebrx-stepfreq-button" id="openwebrx-button-test" 
+                            onclick="btn_test('aaa');">Test</div>
                     </div>
 
-                    <div class="openwebrx-button openwebrx-stepfreq-button" id="openwebrx-button-test" 
-                    onclick="btn_test('aaa');">Test</div>
+                    
 
                     <div id="webrx-mouse-freq">---.--- MHz</div>
                     <div class="openwebrx-panel-line">
