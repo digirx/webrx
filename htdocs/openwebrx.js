@@ -644,7 +644,7 @@ function btn_test(subtype)
 { 
 	console.log("test btn code " + subtype);
 	
-	ws.send("SET"+ " set_center_freq="+12345 );
+	ws.send("SET"+ " set_center_freq="+123456 );
 
 }
 
