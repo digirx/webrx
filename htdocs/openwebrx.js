@@ -642,8 +642,8 @@ function input_freq_changed(freq)
 
 function btn_test(subtype)
 { 
-	console.log("btn code " + subtype);
-	ws.send("set_center_freq");
+	console.log("test btn code " + subtype);
+	ws.send("SET set_center_freq");
 
 }
 
