@@ -118,6 +118,9 @@
                             onclick="btn_change_freq('up5k');">+5k</div>
                     </div>
 
+                    <div class="openwebrx-button openwebrx-stepfreq-button" id="openwebrx-button-test" 
+                    onclick="btn_test('aaa');">Test</div>
+
                     <div id="webrx-mouse-freq">---.--- MHz</div>
                     <div class="openwebrx-panel-line">
                         <div class="openwebrx-button openwebrx-demodulator-button" id="openwebrx-button-nfm" 

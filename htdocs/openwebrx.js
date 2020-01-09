@@ -640,6 +640,13 @@ function input_freq_changed(freq)
 	 print_actual_freq(freq*1000);
 }
 
+function btn_test(subtype)
+{ 
+	console.log("btn code " + subtype);
+	ws.send("set_center_freq");
+
+}
+
 
 function btn_change_freq(subtype)
 { 

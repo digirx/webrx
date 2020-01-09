@@ -285,6 +285,16 @@ def check_server():
     if server_fail: print "[openwebrx-check_server] >>>>>>> ERROR:", server_fail
     return server_fail
 
+
+def restat_rtl():
+    global rtl_thread
+    rtl_thread.join()
+
+    #if rtl_thread and not rtl_thread.is_alive(): server_fail = "rtl_thread failed"
+    #if server_fail: print "[openwebrx-check_server] >>>>>>> ERROR:", server_fail
+    return 
+
+
 def apply_csdr_cfg_to_dsp(dsp):
     dsp.csdr_dynamic_bufsize = cfg.csdr_dynamic_bufsize
     dsp.csdr_print_bufsizes = cfg.csdr_print_bufsizes
@@ -594,6 +604,8 @@ class WebRXHandler(BaseHTTPRequestHandler):
                                             if dsp_initialized: dsp.start()
                                     elif param_name=="secondary_offset_freq" and 0 <= int(param_value) <= dsp.if_samp_rate()/2 and cfg.digimodes_enable:
                                         dsp.set_secondary_offset_freq(int(param_value))
+                                    elif param_name=="set_center_freq": 
+                                        print "[openwebrx-httpd:ws] set_center_freq  cmd "
                                     else:
                                         print "[openwebrx-httpd:ws] invalid parameter"
                                 if bpf_set:
