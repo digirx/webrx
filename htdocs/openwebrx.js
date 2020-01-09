@@ -643,7 +643,8 @@ function input_freq_changed(freq)
 function btn_test(subtype)
 { 
 	console.log("test btn code " + subtype);
-	ws.send("SET set_center_freq");
+	
+	ws.send("SET"+ " set_center_freq="+this.offset_frequency.toString() );
 
 }
 
