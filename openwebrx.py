@@ -169,7 +169,7 @@ def main():
 #        rtl_thread=threading.Thread(target = lambda:subprocess.Popen(cfg.start_rtl_command, shell=True),  args=())
 #        rtl_thread.start()
         rtl_process = subprocess.Popen(cfg.start_rtl_command, shell=True)
-        print "Pid number ", rtl_process.pid()
+        
         
         print "[openwebrx-main] Started rtl_thread: "+cfg.start_rtl_command
 
@@ -303,7 +303,8 @@ def restat_rtl():
 
     print "Try to stop rtl thread"
     
-    print "Pid number ", rtl_process.pid()
+    #print "Pid number ", rtl_process.pid()
+    rtl_process.send_signal(signal.SIGTERM)
 
     #time.sleep(1.0)
     #proc1.kill() # or os.kill(proc1.pid, signal.SIGKILL)
