@@ -301,7 +301,14 @@ def restat_rtl():
 #    rtl_thread .send_signal, [signal.SIGINT]).start()
 
     print "Try to stop rtl thread"
-    rtl_process.Kill()
+    
+    print rtl_process.pid()
+
+    #time.sleep(1.0)
+    #proc1.kill() # or os.kill(proc1.pid, signal.SIGKILL)
+    #rtl_process.Kill()
+    os.kill(rtl_process.pid, signal.SIGKILL)
+    
     rtl_process = subprocess.Popen(cfg.start_rtl_command, shell=True)
 
     #if rtl_thread and not rtl_thread.is_alive(): server_fail = "rtl_thread failed"
