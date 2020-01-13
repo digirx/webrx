@@ -169,6 +169,8 @@ def main():
 #        rtl_thread=threading.Thread(target = lambda:subprocess.Popen(cfg.start_rtl_command, shell=True),  args=())
 #        rtl_thread.start()
         rtl_process = subprocess.Popen(cfg.start_rtl_command, shell=True)
+        print "Pid number ", rtl_process.pid()
+        
         print "[openwebrx-main] Started rtl_thread: "+cfg.start_rtl_command
 
     print "[openwebrx-main] Waiting for I/Q server to start..."
