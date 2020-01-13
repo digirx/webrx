@@ -296,11 +296,13 @@ def check_server():
 
 
 def restat_rtl():
-    global rtl_thread
+    global rtl_process
 #    rtl_thread.
 #    rtl_thread .send_signal, [signal.SIGINT]).start()
 
     print "Try to stop rtl thread"
+    rtl_process.Kill()
+    rtl_process = subprocess.Popen(cfg.start_rtl_command, shell=True)
 
     #if rtl_thread and not rtl_thread.is_alive(): server_fail = "rtl_thread failed"
     #if server_fail: print "[openwebrx-check_server] >>>>>>> ERROR:", server_fail
