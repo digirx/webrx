@@ -115,7 +115,7 @@ receiver_failed=spectrum_thread_watchdog_last_tick=rtl_thread=spectrum_dsp=serve
 
 def main():
     global clients, clients_mutex, pypy, lock_try_time, avatar_ctime, cfg, logs
-    global serverfail, rtl_thread
+    global serverfail, rtl_process
     print
     print "OpenWebRX - Open Source SDR Web App for Everyone!  | for license see LICENSE file in the package"
     print "_________________________________________________________________________________________________"
