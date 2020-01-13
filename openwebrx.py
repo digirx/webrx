@@ -305,8 +305,8 @@ def restat_rtl():
 
     #time.sleep(1.0)
     #proc1.kill() # or os.kill(proc1.pid, signal.SIGKILL)
-    #rtl_process.Kill()
-    os.kill(rtl_process.pid, signal.SIGTERM)
+    rtl_process.terminate()
+    #os.kill(rtl_process.pid, signal.SIGTERM)
 
     #rtl_process = subprocess.Popen(cfg.start_rtl_command, shell=True)
 
