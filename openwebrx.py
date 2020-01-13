@@ -169,9 +169,8 @@ def main():
 #        rtl_thread=threading.Thread(target = lambda:subprocess.Popen(cfg.start_rtl_command, shell=True),  args=())
 #        rtl_thread.start()
         rtl_process = subprocess.Popen(cfg.start_rtl_command, shell=True)
-        
-        
         print "[openwebrx-main] Started rtl_thread: "+cfg.start_rtl_command
+
     print "[openwebrx-main] Waiting for I/Q server to start..."
     while True:
         testsock=socket.socket()
@@ -286,7 +285,7 @@ def spectrum_watchdog_thread_function():
             return
 
 def check_server():
-    global spectrum_dsp, server_fail, rtl_thread
+    global spectrum_dsp, server_fail, rtl_process
     if server_fail: return server_fail
     #print spectrum_dsp.process.poll()
     if spectrum_dsp and spectrum_dsp.process.poll()!=None: server_fail = "spectrum_thread dsp subprocess failed"
@@ -302,7 +301,7 @@ def restat_rtl():
 
     print "Try to stop rtl thread"
     
-    print rtl_process.pid()
+    #print "Pid number ", rtl_process.pid()
 
     #time.sleep(1.0)
     #proc1.kill() # or os.kill(proc1.pid, signal.SIGKILL)
