@@ -111,7 +111,7 @@ def access_log(data):
     logs.access_log.write("["+datetime.datetime.now().isoformat()+"] "+data+"\n")
     logs.access_log.flush()
 
-receiver_failed=spectrum_thread_watchdog_last_tick=rtl_thread=spectrum_dsp=server_fail=None
+receiver_failed=spectrum_thread_watchdog_last_tick=rtl_process=spectrum_dsp=server_fail=None
 
 def main():
     global clients, clients_mutex, pypy, lock_try_time, avatar_ctime, cfg, logs
@@ -308,7 +308,7 @@ def restat_rtl():
     #proc1.kill() # or os.kill(proc1.pid, signal.SIGKILL)
     #rtl_process.Kill()
     os.kill(rtl_process.pid, signal.SIGKILL)
-    
+
     rtl_process = subprocess.Popen(cfg.start_rtl_command, shell=True)
 
     #if rtl_thread and not rtl_thread.is_alive(): server_fail = "rtl_thread failed"
