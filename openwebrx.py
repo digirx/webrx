@@ -45,6 +45,8 @@ from collections import namedtuple
 import Queue
 import ctypes
 
+
+
 #import rtl_mus
 import rxws
 import uuid
@@ -72,6 +74,10 @@ def import_all_plugins(directory):
                 print "[openwebrx-import] Found plugin:",importname
                 importlib.import_module(importname)
 """
+
+
+class Kill(Exception): pass
+
 
 class MultiThreadHTTPServer(ThreadingMixIn, HTTPServer):
     pass
@@ -160,8 +166,11 @@ def main():
             return
         print "[openwebrx-main] nmux_bufsize = %d, nmux_bufcnt = %d" % (nmux_bufsize, nmux_bufcnt)
         cfg.start_rtl_command += "| nmux --bufsize %d --bufcnt %d --port %d --address 127.0.0.1" % (nmux_bufsize, nmux_bufcnt, cfg.iq_server_port)
-        rtl_thread=threading.Thread(target = lambda:subprocess.Popen(cfg.start_rtl_command, shell=True),  args=())
-        rtl_thread.start()
+#        rtl_thread=threading.Thread(target = lambda:subprocess.Popen(cfg.start_rtl_command, shell=True),  args=())
+#        rtl_thread.start()
+        rtl_process = subprocess.Popen(cfg.start_rtl_command, shell=True)
+        
+        
         print "[openwebrx-main] Started rtl_thread: "+cfg.start_rtl_command
     print "[openwebrx-main] Waiting for I/Q server to start..."
     while True:
@@ -288,7 +297,9 @@ def check_server():
 
 def restat_rtl():
     global rtl_thread
-    rtl_thread.join()
+    rtl_thread.
+    rtl_thread .send_signal, [signal.SIGINT]).start()
+
 
     #if rtl_thread and not rtl_thread.is_alive(): server_fail = "rtl_thread failed"
     #if server_fail: print "[openwebrx-check_server] >>>>>>> ERROR:", server_fail
@@ -605,7 +616,7 @@ class WebRXHandler(BaseHTTPRequestHandler):
                                     elif param_name=="secondary_offset_freq" and 0 <= int(param_value) <= dsp.if_samp_rate()/2 and cfg.digimodes_enable:
                                         dsp.set_secondary_offset_freq(int(param_value))
                                     elif param_name=="set_center_freq": 
-                                        print "[openwebrx-httpd:ws] set_center_freq  cmd"
+                                        print "[openwebrx-httpd:ws] set_center_freq  " + int(param_value)
                                         restat_rtl()
                                     else:
                                         print "[openwebrx-httpd:ws] invalid parameter"
