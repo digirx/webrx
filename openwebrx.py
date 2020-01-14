@@ -117,7 +117,7 @@ def access_log(data):
 receiver_failed=spectrum_thread_watchdog_last_tick=rtl_process=spectrum_dsp=server_fail=None
 
 
-def detach_procesGroup():
+def detach_processGroup():
     os.setpgrp()
 
 
