@@ -168,7 +168,7 @@ def main():
         cfg.start_rtl_command += "| nmux --bufsize %d --bufcnt %d --port %d --address 127.0.0.1" % (nmux_bufsize, nmux_bufcnt, cfg.iq_server_port)
 #        rtl_thread=threading.Thread(target = lambda:subprocess.Popen(cfg.start_rtl_command, shell=True),  args=())
 #        rtl_thread.start()
-        rtl_process = subprocess.Popen(cfg.start_rtl_command, shell=True)
+        rtl_process = subprocess.Popen(cfg.start_rtl_command,stdin = subprocess.PIPE,  shell=True)
         
         
         print "[openwebrx-main] Started rtl_thread: "+cfg.start_rtl_command
@@ -305,6 +305,7 @@ def restat_rtl():
     
     #print "Pid number ", rtl_process.pid()
     rtl_process.send_signal(signal.SIGTERM)
+    rtl_process.wait()
 
     #time.sleep(1.0)
     #proc1.kill() # or os.kill(proc1.pid, signal.SIGKILL)
