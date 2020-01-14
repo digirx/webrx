@@ -324,7 +324,7 @@ def restat_rtl():
    # rtl_process.terminate()
     #os.kill(rtl_process.pid, signal.SIGTERM)
 
-    reruncmd = "rtl_sdr -s 250000 -f 500000 -p 50 -g 20"
+    reruncmd = "rtl_sdr -s 250000 -f 500000 -p 50 -g 20" + "| nmux --bufsize %d --bufcnt %d --port %d --address 127.0.0.1" % (nmux_bufsize, nmux_bufcnt, cfg.iq_server_port)
     rtl_process = subprocess.Popen(reruncmd, shell=True)
 
     #if rtl_thread and not rtl_thread.is_alive(): server_fail = "rtl_thread failed"
