@@ -312,7 +312,7 @@ def restat_rtl():
     print "\n\nTry to stop rtl thread\n\n"
     
     #print "Pid number ", rtl_process.pid()
-    rtl_process.send_signal(signal.SIGTERM)
+    rtl_process.send_signal(signal.SIGINT)
  
 
     #time.sleep(1.0)
