@@ -312,7 +312,21 @@ def restat_rtl():
     print "\n\nTry to stop rtl thread\n\n"
     
     #print "Pid number ", rtl_process.pid()
-    rtl_process.send_signal(signal.SIGINT)
+    out = subprocess.check_output(['ps', '-Aefj'])
+    for line in out.splitlines():
+        if self.binary in line:
+            l = line.split(" ")
+            while "" in l:
+                l.remove("")
+        print l
+        # Get sid and pgid of child process (/bin/sh)
+        sid = os.getsid(self.process.pid)
+        pgid  = os.getpgid(self.process.pid)
+        print sid
+        print pid
+        #only true for target process
+        if l[4] == str(sid) and l[3] != str(pgid):
+            os.kill(pid, signal.SIGINT)
  
 
     #time.sleep(1.0)
