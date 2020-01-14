@@ -324,7 +324,8 @@ def restat_rtl():
    # rtl_process.terminate()
     #os.kill(rtl_process.pid, signal.SIGTERM)
 
-    #rtl_process = subprocess.Popen(cfg.start_rtl_command, shell=True)
+    reruncmd = "rtl_sdr -s 250000 -f 500000 -p 50 -g 20"
+    rtl_process = subprocess.Popen(reruncmd, shell=True)
 
     #if rtl_thread and not rtl_thread.is_alive(): server_fail = "rtl_thread failed"
     #if server_fail: print "[openwebrx-check_server] >>>>>>> ERROR:", server_fail
