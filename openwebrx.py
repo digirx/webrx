@@ -314,14 +314,14 @@ def restat_rtl():
     #print "Pid number ", rtl_process.pid()
     out = subprocess.check_output(['ps', '-Aefj'])
     for line in out.splitlines():
-        if self.binary in line:
+        if "rtl_sdr" in line:
             l = line.split(" ")
             while "" in l:
                 l.remove("")
         print l
         # Get sid and pgid of child process (/bin/sh)
-        sid = os.getsid(self.process.pid)
-        pgid  = os.getpgid(self.process.pid)
+        sid = os.getsid(rtl_process.pid)
+        pgid  = os.getpgid(rtl_process.pid)
         print sid
         print pid
         #only true for target process
