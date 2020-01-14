@@ -117,6 +117,10 @@ def access_log(data):
 receiver_failed=spectrum_thread_watchdog_last_tick=rtl_process=spectrum_dsp=server_fail=None
 
 
+def detach_procesGroup():
+    os.setpgrp()
+
+
 def main():
     global clients, clients_mutex, pypy, lock_try_time, avatar_ctime, cfg, logs
     global serverfail, rtl_process
@@ -172,7 +176,7 @@ def main():
         cfg.start_rtl_command += "| nmux --bufsize %d --bufcnt %d --port %d --address 127.0.0.1" % (nmux_bufsize, nmux_bufcnt, cfg.iq_server_port)
 #        rtl_thread=threading.Thread(target = lambda:subprocess.Popen(cfg.start_rtl_command, shell=True),  args=())
 #        rtl_thread.start()
-        rtl_process = subprocess.Popen(cfg.start_rtl_command,stdin = subprocess.PIPE,  shell=True)
+        rtl_process = subprocess.Popen(cfg.start_rtl_command,stdin = subprocess.PIPE, preexec_fn=detach_processGroup, shell=True)
         
         
         print "[openwebrx-main] Started rtl_thread: "+cfg.start_rtl_command
