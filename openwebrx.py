@@ -121,6 +121,22 @@ def detach_processGroup():
     os.setpgrp()
 
 
+def start_rtl_thread():
+    nmux_bufcnt = nmux_bufsize = 0
+    while nmux_bufsize < cfg.samp_rate/4: nmux_bufsize += 4096
+    while nmux_bufsize * nmux_bufcnt < cfg.nmux_memory * 1e6: nmux_bufcnt += 1
+    if nmux_bufcnt == 0 or nmux_bufsize == 0: 
+        print "[openwebrx-main] Error: nmux_bufsize or nmux_bufcnt is zero. These depend on nmux_memory and samp_rate options in config_webrx.py"
+        return
+    print "[openwebrx-main] nmux_bufsize = %d, nmux_bufcnt = %d" % (nmux_bufsize, nmux_bufcnt)
+    cfg.start_rtl_command += "| nmux --bufsize %d --bufcnt %d --port %d --address 127.0.0.1" % (nmux_bufsize, nmux_bufcnt, cfg.iq_server_port)
+#        rtl_thread=threading.Thread(target = lambda:subprocess.Popen(cfg.start_rtl_command, shell=True),  args=())
+#        rtl_thread.start()
+    rtl_process = subprocess.Popen(cfg.start_rtl_command,stdin = subprocess.PIPE, preexec_fn=detach_processGroup, shell=True)
+    print "[openwebrx-main] Started rtl_thread: "+cfg.start_rtl_command
+
+
+
 def main():
     global clients, clients_mutex, pypy, lock_try_time, avatar_ctime, cfg, logs
     global serverfail, rtl_process
@@ -166,20 +182,7 @@ def main():
         print "[openwebrx-main] You need to install an up-to-date version of \"csdr\" that contains the \"nmux\" tool to run OpenWebRX! Please upgrade \"csdr\"!\n"
         return
     if cfg.start_rtl_thread:
-        nmux_bufcnt = nmux_bufsize = 0
-        while nmux_bufsize < cfg.samp_rate/4: nmux_bufsize += 4096
-        while nmux_bufsize * nmux_bufcnt < cfg.nmux_memory * 1e6: nmux_bufcnt += 1
-        if nmux_bufcnt == 0 or nmux_bufsize == 0: 
-            print "[openwebrx-main] Error: nmux_bufsize or nmux_bufcnt is zero. These depend on nmux_memory and samp_rate options in config_webrx.py"
-            return
-        print "[openwebrx-main] nmux_bufsize = %d, nmux_bufcnt = %d" % (nmux_bufsize, nmux_bufcnt)
-        cfg.start_rtl_command += "| nmux --bufsize %d --bufcnt %d --port %d --address 127.0.0.1" % (nmux_bufsize, nmux_bufcnt, cfg.iq_server_port)
-#        rtl_thread=threading.Thread(target = lambda:subprocess.Popen(cfg.start_rtl_command, shell=True),  args=())
-#        rtl_thread.start()
-        rtl_process = subprocess.Popen(cfg.start_rtl_command,stdin = subprocess.PIPE, preexec_fn=detach_processGroup, shell=True)
-        
-        
-        print "[openwebrx-main] Started rtl_thread: "+cfg.start_rtl_command
+        start_rtl_thread()
 
     print "[openwebrx-main] Waiting for I/Q server to start..."
     while True:
@@ -317,6 +320,8 @@ def restat_rtl():
     out = subprocess.check_output(['pkill', 'rtl_sdr'])
     print out
   
+
+    start_rtl_thread()
  
 
     #time.sleep(1.0)
@@ -324,8 +329,7 @@ def restat_rtl():
    # rtl_process.terminate()
     #os.kill(rtl_process.pid, signal.SIGTERM)
 
-    reruncmd = "rtl_sdr -s 250000 -f 500000 -p 50 -g 20" + "| nmux --bufsize %d --bufcnt %d --port %d --address 127.0.0.1" % (nmux_bufsize, nmux_bufcnt, cfg.iq_server_port)
-    rtl_process = subprocess.Popen(reruncmd, shell=True)
+    
 
     #if rtl_thread and not rtl_thread.is_alive(): server_fail = "rtl_thread failed"
     #if server_fail: print "[openwebrx-check_server] >>>>>>> ERROR:", server_fail
