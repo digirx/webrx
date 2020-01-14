@@ -82,6 +82,7 @@ class Kill(Exception): pass
 class MultiThreadHTTPServer(ThreadingMixIn, HTTPServer):
     pass
 
+
 def handle_signal(sig, frame):
     global spectrum_dsp
     if sig == signal.SIGUSR1:
@@ -106,12 +107,15 @@ def handle_signal(sig, frame):
         spectrum_dsp.stop()
         os._exit(1) #not too graceful exit
 
+
 def access_log(data):
     global logs
     logs.access_log.write("["+datetime.datetime.now().isoformat()+"] "+data+"\n")
     logs.access_log.flush()
 
+
 receiver_failed=spectrum_thread_watchdog_last_tick=rtl_process=spectrum_dsp=server_fail=None
+
 
 def main():
     global clients, clients_mutex, pypy, lock_try_time, avatar_ctime, cfg, logs
@@ -301,11 +305,11 @@ def restat_rtl():
 #    rtl_thread.
 #    rtl_thread .send_signal, [signal.SIGINT]).start()
 
-    print "Try to stop rtl thread"
+    print "\n\nTry to stop rtl thread\n\n"
     
     #print "Pid number ", rtl_process.pid()
     rtl_process.send_signal(signal.SIGTERM)
-    rtl_process.wait()
+ 
 
     #time.sleep(1.0)
     #proc1.kill() # or os.kill(proc1.pid, signal.SIGKILL)
